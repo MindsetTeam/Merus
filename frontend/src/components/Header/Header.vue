@@ -65,6 +65,7 @@ export default {
 };
 </script>
 <style>
+
 .bm-burger-bars {
   background-color: #0000009c;
 }
@@ -79,6 +80,9 @@ export default {
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /*0.5 second transition effect to slide in the sidenav*/
+}
+input:focus {
+  outline: none;
 }
 </style>
 <style scoped>
@@ -104,14 +108,18 @@ input:focus {
   align-items: center;
 }
 .header-right h3:hover {
+  transition: 0.1s ease all;
   color: #56baed;
   cursor: pointer;
+}
+.header-right h3{
+  font-size: 1.7vw ;
 }
 .header-container {
     margin-left: auto;
     margin-right: auto;
   width: 70%;
-  height: 40px;
+  
   display: grid;
   grid-template-columns: 50px 1fr 3fr 3fr;
 }
