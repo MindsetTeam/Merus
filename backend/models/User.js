@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: [true, "Please a email"],
+      required: [true, "Please add email"],
       unique: [true, "Email already existed"],
     },
     coverBackground: {

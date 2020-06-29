@@ -3,8 +3,6 @@ const path = require('path');
 const faker = require('faker');
 const { json } = require('express');
 
-console.log(faker.name.jobDescriptor())
-
 const users = [];
 
 for (let i = 0; i < 4; i++) {
