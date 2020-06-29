@@ -1,0 +1,14 @@
+POST http://localhost:5000/api/v1/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "srun1",
+  "email": "srun1@gmail.com"
+}
+
+###
+GET http://localhost:5000/api/v1/users?skill=dancer,singer&search=srun&sort=username HTTP/1.1
+# 5ef876e6aa73802528a22703 cheat
+# 5ef876f3aa73802528a22704 srun
+###
+GET http://localhost:5000/api/v1/users/5ef87acc3acd06426015f1ff HTTP/1.1

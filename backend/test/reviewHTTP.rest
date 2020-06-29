@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/v1/reviews HTTP/1.1
+Content-Type: application/json
+
+{
+  "user": "5ef876e6aa73802528a22703",
+  "toUser": "5ef876f3aa73802528a22704", 
+  "text": "what a ass hole",
+  "rating": 3
+}
