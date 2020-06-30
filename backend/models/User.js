@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      lowercase: true,
       required: [true, "Please add email"],
       unique: [true, "Email already existed"],
     },
@@ -70,16 +71,22 @@ UserSchema.path("skill").validate(function (val) {
   if (val.length > 2) throw new ErrorResponse("Skill must less than 2");
 });
 
+UserSchema.virtual('posts', {
+  ref: 'Post',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false
+});
+
 UserSchema.pre("save", function (next) {
   this.slug = slugify(this.username, { lower: true });
   next();
 });
 
-UserSchema.post("remove", async function (next) {
+UserSchema.post("remove", async function () {
   let queryDeletePost = this.model("Post").deleteMany({ user: this._id });
   let queryDeleteReview = this.model("Review").deleteMany({ toUser: this._id });
   await Promise.all([queryDeletePost, queryDeleteReview]);
-  next();
 });
 
 module.exports = mongoose.model("User", UserSchema);

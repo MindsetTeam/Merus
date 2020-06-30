@@ -6,9 +6,9 @@ const ErrorResponse = require("../utils/errorResponse");
 module.exports = {
   getPosts: asyncHandler(async (req, res, next) => {
     let posts;
-    if (req.query.userId) {
+    if (req.params.userId) {
       let sort = req.query.sort || "-createAt";
-      posts = await Post.find({ toUser: req.params.userId }).sort(sort);
+      posts = await Post.find({ user: req.params.userId }).sort(sort).select('-user');
     }
     res.status(200).json({
       success: true,
@@ -17,34 +17,35 @@ module.exports = {
     });
   }),
   getPost: asyncHandler(async (req, res, next) => {
-    const PostId = req.params.id;
-    const Post = await Post.findById(PostId);
-    if (!Post) {
-      throw new ErrorResponse("Post id " + PostId + " not found", 404);
+    const postId = req.params.id;
+    const post = await Post.findById(postId).populate('user');
+    if (!post) {
+      throw new ErrorResponse("Post id " + postId + " not found", 404);
     }
     res.status(200).json({
       success: true,
       msg: "Get Single Posts",
-      data: Post,
+      data: post,
     });
   }),
   updatePost: asyncHandler(async (req, res, next) => {
-    const PostId = req.params.id;
-    const Post = await Post.findByIdAndUpdate(PostId, req.body, {
+    const postId = req.params.id;
+    const post = await Post.findByIdAndUpdate(postId, req.body, {
       new: true,
       runValidators: true,
     });
-    if (!Post) {
-      throw new ErrorResponse("Post id " + PostId + " not found", 404);
+    if (!post) {
+      throw new ErrorResponse("Post id " + postId + " not found", 404);
     }
     res.status(200).json({
       success: true,
       msg: `Post id ${req.params.id} updated`,
+      data: post
     });
   }),
   deletePost: asyncHandler(async (req, res, next) => {
     let postId = req.params.id;
-    const post = await Post.findOne(postId);
+    const post = await Post.findById(postId);
     if (!post) {
       throw new ErrorResponse("Post id " + postId + " not found", 404);
     }
@@ -55,14 +56,15 @@ module.exports = {
     });
   }),
   createPost: asyncHandler(async (req, res, next) => {
-    let post;
     if (req.params.userId) {
-      post = await Post.create({ ...req.query, toUser: req.params.userId });
+      let post = await Post.create({ ...req.body, user: req.params.userId });
+      res.status(200).json({
+        success: true,
+        msg: "Post created",
+        data: post,
+      });
+    } else {
+      throw new ErrorResponse("Please provide User Id", 400);
     }
-    res.status(200).json({
-      success: true,
-      msg: "Post created",
-      data: post,
-    });
   }),
 };

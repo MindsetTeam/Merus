@@ -5,11 +5,12 @@ const {
   getUsers,
   getUser,
   updateUser,
+  deleteUser,
 } = require("../controllers/userController");
 const reviewRouter = require("./review");
 const postRouter = require("./post");
 
-const router = express.Router({ mergeParams: true });
+const router = express.Router();
 
 router.use("/:userId/reviews", reviewRouter);
 router.use("/:userId/posts", postRouter);
@@ -58,8 +59,6 @@ router.use("/:userId/posts", postRouter);
 //   })
 // });
 
-
-
 // // created post
 // fetch('http://localhost:5000/api/v1/users/:userId/posts', {
 //   method: 'POST',
@@ -77,10 +76,8 @@ router.use("/:userId/posts", postRouter);
 // //   data: post,
 // // });
 
-
-
 router.route("/").post(createUser).get(getUsers);
 // http://localhost:5000/api/v1/:id
-router.route("/:id").get(getUser).put(updateUser);
+router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;

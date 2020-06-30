@@ -45,7 +45,7 @@ ReviewSchema.statics.getAverageRating = async function (toUserId) {
     },
   ]);
   await this.model("User").findByIdAndUpdate(toUserId, {
-    averageRate: result[0].averageRating,
+    averageRate: result[0].averageRating.toFixed(1),
   });
 };
 
@@ -58,6 +58,7 @@ ReviewSchema.statics.getReviewCount = async function (toUserId) {
     reviewCount: result[0].reviewCount,
   });
 };
+
 
 ReviewSchema.pre("remove", function () {
   this.constructor.getAverageRating(this.toUser);

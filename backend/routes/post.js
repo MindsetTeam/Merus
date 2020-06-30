@@ -8,7 +8,7 @@ const {
   deletePost,
 } = require("../controllers/postController");
 
-const router = express.Router();
+const router = express.Router({mergeParams:true});
 
 router.route("/").post(createPost).get(getPosts);
 router.route("/:id").get(getPost).put(updatePost).delete(deletePost);
