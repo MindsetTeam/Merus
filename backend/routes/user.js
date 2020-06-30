@@ -78,6 +78,9 @@ router.use("/:userId/posts", postRouter);
 
 router.route("/").post(createUser).get(getUsers);
 // http://localhost:5000/api/v1/:id
-router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
+
+//Error Here
+
+//router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;

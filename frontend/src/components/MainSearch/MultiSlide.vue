@@ -145,13 +145,20 @@
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
-
+import axios from "axios"
 export default {
   name: "swiper-example-multiple-slides-per-biew",
   title: "Multiple slides per view",
   components: {
     Swiper,
     SwiperSlide
+  },
+  methods:{
+    async getAllUsers(){
+      const users = await axios("http://localhost:5000/api/v1/users?limit=6")
+      console.log(users);
+      
+    },
   },
  data() {
       return {
@@ -171,6 +178,9 @@ export default {
           }
         }
       }
+    },
+    created(){
+      this.getAllUsers();
     }
 };
 </script>
@@ -228,7 +238,7 @@ h1{
   border-radius: 50%;
 }
 .router-link img {
-  width: 400px;
+  width: 500px;
 }
 .swiper-slide {
   border: 1px solid rgba(0, 0, 0, 0.404);
