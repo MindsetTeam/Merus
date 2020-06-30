@@ -5,7 +5,6 @@ const ErrorResponse = require("../utils/errorResponse");
 
 module.exports = {
   // only user with skill
-  // api/v1/user?search=asdfasd
   getUsers: asyncHandler(async (req, res, next) => {
     const fieldForRemove = ["sort", "include", "page", "limit", "search"];
     const reqQuery = { ...req.query };
@@ -18,30 +17,41 @@ module.exports = {
       const splitSkill = req.query.skill.split(",");
       if (splitSkill.length > 1) {
         formateQuery.skill = {
-          $in: splitSkill,
+          $in: splitSkill.map((v) => v.toLowerCase()),
         };
       } else {
-        formateQuery.skill = splitSkill[0];
+        formateQuery.skill = splitSkill[0].toLowerCase();
       }
     }
     if (req.query.search) {
-      console.log(req.query.search);
       formateQuery = { $text: { $search: req.query.search }, ...formateQuery };
     }
-    let totalDocuments = User.countDocuments({
+
+    // remove normal user without skill
+    formateQuery = {
       skill: {
         $ne: [],
       },
       ...formateQuery,
-    });
-    let computeQuery = User.find(formateQuery).where("skill").ne([]);
+    };
+    let totalDocuments = User.countDocuments(formateQuery);
+    let computeQuery = User.find(formateQuery);
     if (req.query.sort) {
       computeQuery.sort(req.query.sort.split(",").join(" "));
     } else {
       computeQuery.sort("-createdAt");
     }
     if (req.query.include) {
+      let includeArray = req.query.include.split(",");
+      if (
+        includeArray.indexOf("posts") >= 0 ||
+        (req.query.include.includes("-") &&
+          includeArray.indexOf("-posts") == -1)
+      )
+        computeQuery.populate("posts");
       computeQuery.select(req.query.include.split(",").join(" "));
+    } else {
+      computeQuery.populate("posts");
     }
     let limit = +req.query.sort || 20;
     let page = +req.query.page || 1;
@@ -70,6 +80,9 @@ module.exports = {
     });
   }),
   updateUser: asyncHandler(async (req, res, next) => {
+    if (req.body.skill) {
+      req.body.skill = JSON.parse(req.body.skill.replace(/'/g, '"'));
+    }
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
@@ -80,6 +93,7 @@ module.exports = {
     res.status(200).json({
       success: true,
       msg: `User id ${req.params.id} updated`,
+      data: user,
     });
   }),
   createUser: asyncHandler(async (req, res, next) => {
@@ -91,6 +105,18 @@ module.exports = {
       success: true,
       msg: "User created",
       data: user,
+    });
+  }),
+  deleteUser: asyncHandler(async (req, res, next) => {
+    let userId = req.params.id;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new ErrorResponse("User id " + userId + " not found", 404);
+    }
+    await user.remove();
+    res.status(200).json({
+      success: true,
+      msg: `User id ${req.params.id} deleted`,
     });
   }),
 };
