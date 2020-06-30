@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const chalk = require("chalk");
 const morgan = require("morgan");
+const cors = require('cors');
 
 const connectionDB = require("./config/dbConnection");
 const errorHandler = require("./middleware/errorHandler");
@@ -16,6 +17,7 @@ dotenv.config({
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 connectionDB();
