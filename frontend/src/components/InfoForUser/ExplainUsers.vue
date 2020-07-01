@@ -1,4 +1,5 @@
 <template>
+<div class="biggest-container">
   <div class="container">
     <div class="left-container">
       <h1>Find Any Talents Of Your Choice</h1>
@@ -33,6 +34,7 @@
         />
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -40,6 +42,10 @@ export default {};
 </script>
 
 <style scoped>
+.biggest-container{
+  display: flex;
+  justify-content: center;
+}
 .far{
   color: #56baed;
   margin-right: 5px;
@@ -67,6 +73,8 @@ ul li{
   
 }
 .container{
+  justify-content: center;
+  grid-gap: 30px;
   margin-top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -246,5 +246,11 @@ h1{
   justify-content: center;
   align-items: flex-start;
   padding: 0;
+  transition: 0.5s ease all;
+}
+.swiper-slide:hover{
+  opacity: 0.7;
+  
+
 }
 </style>
