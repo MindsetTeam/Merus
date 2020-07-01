@@ -3,136 +3,41 @@
 <div>
     <h1>Popular Talents</h1>
   <swiper style="height:450px;width:1200px;" class="swiper" :options="swiperOption">
-    <swiper-slide class="swiper-slide">
+    <swiper-slide v-for="(user,i) in users" :key="i" class="swiper-slide">
       <router-link class="router-link" :to="{name:'main'}">
        <img
           style="height:250px;"
-          src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Shure_mikrofon_55S.jpg"
+          :src="user.coverBackground"
           alt
         />
         <div class="corousel-profile">
           <img
             style="width:40px;height:40px;"
-            src="https://scontent.fsyd3-1.fna.fbcdn.net/v/t1.0-9/105562021_3129106260485044_7564906823146291360_o.jpg?_nc_cat=107&_nc_sid=8bfeb9&_nc_ohc=OyN9ij_tNagAX8Z98R_&_nc_ht=scontent.fsyd3-1.fna&oh=edbe1a1abfa46f8895d4d304348bb685&oe=5F17E6BF"
+            :src="user.imageUrl"
             alt
           />
           <div>
-            <p>Socheat Chhun</p>
-            <p>Singer</p>
+            <p style="font-weight:700;">{{user.username}}</p>
+            <p>{{user.skill[0].toUpperCase()}}</p>
+            
+
           </div>
         </div>
         <div class="profile-des">
-          <p>I will Sing about 4 to 5 songs according to your needs</p>
+          <p>{{user.description}}</p>
           <div>
             <i style="color:gold;" class="fas fa-star"></i>
             <p>4.8</p>
-            <p>(1.2k+)</p>
+            <p>{{user.reviewCount}}</p>
           </div>
         </div>
         <div class="profile-price">
           <i class="fas fa-heart"></i>
-          <p>Starting At: $30</p>
+          <p>Starting At: ${{user.price}}</p>
         </div>
       </router-link>
     </swiper-slide>
-    <swiper-slide class="swiper-slide">
-      <router-link class="router-link" :to="{name:'main'}">
-       <img
-          style="height:250px;"
-          src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Shure_mikrofon_55S.jpg"
-          alt
-        />
-        <div class="corousel-profile">
-          <img
-            style="width:40px;height:40px;"
-            src="https://scontent.fsyd3-1.fna.fbcdn.net/v/t1.0-9/105562021_3129106260485044_7564906823146291360_o.jpg?_nc_cat=107&_nc_sid=8bfeb9&_nc_ohc=OyN9ij_tNagAX8Z98R_&_nc_ht=scontent.fsyd3-1.fna&oh=edbe1a1abfa46f8895d4d304348bb685&oe=5F17E6BF"
-            alt
-          />
-          <div>
-            <p>Socheat Chhun</p>
-            <p>Singer</p>
-          </div>
-        </div>
-        <div class="profile-des">
-          <p>I will Sing about 4 to 5 songs according to your needs</p>
-          <div>
-            <i style="color:gold;" class="fas fa-star"></i>
-            <p>4.8</p>
-            <p>(1.2k+)</p>
-          </div>
-        </div>
-        <div class="profile-price">
-          <i class="fas fa-heart"></i>
-          <p>Starting At: $30</p>
-        </div>
-      </router-link>
-    </swiper-slide>
-  <swiper-slide class="swiper-slide">
-      <router-link class="router-link" :to="{name:'main'}">
-       <img
-          style="height:250px;"
-          src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Shure_mikrofon_55S.jpg"
-          alt
-        />
-        <div class="corousel-profile">
-          <img
-            style="width:40px;height:40px;"
-            src="https://scontent.fsyd3-1.fna.fbcdn.net/v/t1.0-9/105562021_3129106260485044_7564906823146291360_o.jpg?_nc_cat=107&_nc_sid=8bfeb9&_nc_ohc=OyN9ij_tNagAX8Z98R_&_nc_ht=scontent.fsyd3-1.fna&oh=edbe1a1abfa46f8895d4d304348bb685&oe=5F17E6BF"
-            alt
-          />
-          <div>
-            <p>Socheat Chhun</p>
-            <p>Singer</p>
-          </div>
-        </div>
-        <div class="profile-des">
-          <p>I will Sing about 4 to 5 songs according to your needs</p>
-          <div>
-            <i style="color:gold;" class="fas fa-star"></i>
-            <p>4.8</p>
-            <p>(1.2k+)</p>
-          </div>
-        </div>
-        <div class="profile-price">
-          <i class="fas fa-heart"></i>
-          <p>Starting At: $30</p>
-        </div>
-      </router-link>
-      
-    </swiper-slide>
-    <swiper-slide class="swiper-slide">
-      <router-link class="router-link" :to="{name:'main'}">
-       <img
-          style="height:250px;"
-          src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Shure_mikrofon_55S.jpg"
-          alt
-        />
-        <div class="corousel-profile">
-          <img
-            style="width:40px;height:40px;"
-            src="https://scontent.fsyd3-1.fna.fbcdn.net/v/t1.0-9/105562021_3129106260485044_7564906823146291360_o.jpg?_nc_cat=107&_nc_sid=8bfeb9&_nc_ohc=OyN9ij_tNagAX8Z98R_&_nc_ht=scontent.fsyd3-1.fna&oh=edbe1a1abfa46f8895d4d304348bb685&oe=5F17E6BF"
-            alt
-          />
-          <div>
-            <p>Socheat Chhun</p>
-            <p>Singer</p>
-          </div>
-        </div>
-        <div class="profile-des">
-          <p>I will Sing about 4 to 5 songs according to your needs</p>
-          <div>
-            <i style="color:gold;" class="fas fa-star"></i>
-            <p>4.8</p>
-            <p>(1.2k+)</p>
-          </div>
-        </div>
-        <div class="profile-price">
-          <i class="fas fa-heart"></i>
-          <p>Starting At: $30</p>
-        </div>
-      </router-link>
-      
-    </swiper-slide>
+    
 
 
     <div class="swiper-pagination" slot="pagination"></div>
@@ -156,12 +61,14 @@ export default {
   methods:{
     async getAllUsers(){
       const users = await axios("http://localhost:5000/api/v1/users?limit=6")
-      console.log(users);
+      console.log(users.data.data);
+      this.users=users.data.data;
       
     },
   },
  data() {
       return {
+        users:[],
         swiperOption: {
           slidesPerView: 3,
           spaceBetween: 30,
@@ -224,6 +131,7 @@ h1{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 10px;
 }
 .corousel-profile {
   display: flex;
