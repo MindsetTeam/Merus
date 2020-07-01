@@ -69,7 +69,7 @@ module.exports = {
   }),
   getUser: asyncHandler(async (req, res, next) => {
     const userId = req.params.id;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("posts");
     if (!user) {
       throw new ErrorResponse("User id " + userId + " not found", 404);
     }

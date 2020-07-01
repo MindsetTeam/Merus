@@ -7,8 +7,8 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5000/api/v1/users?skill=dancer,singer&search=srun&sort=username HTTP/1.1
+GET http://localhost:5000/api/v1/users?skill=dancer,singer HTTP/1.1
 # 5ef876e6aa73802528a22703 cheat
 # 5ef876f3aa73802528a22704 srun
 ###
-GET http://localhost:5000/api/v1/users/5ef87acc3acd06426015f1ff HTTP/1.1
+GET http://localhost:5000/api/v1/users/5efa09af8e7a93108c464278 HTTP/1.1
