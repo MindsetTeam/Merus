@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import MainPage from '../components/MainPage.vue'
+import Profile from "../components/User/Profile"
 Vue.use(VueRouter)
 
   const routes = [
@@ -9,6 +10,11 @@ Vue.use(VueRouter)
     path: '/',
     name: 'MainPage',
     component: MainPage
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
   },
   {
     path: '/about',

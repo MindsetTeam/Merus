@@ -7,7 +7,7 @@
         loading="lazy"
       />
     <div class="info">
-      <h1>You can get contacted.</h1>
+    
       <h1>Just upload your skill to youtube.</h1>
       <p>Copy the url of your youtube video to our platform.</p>
       <button>Get Started</button>
@@ -27,8 +27,9 @@ margin-right: auto;
   position: relative;
   margin-bottom: 30px;
 }
-.img-container {
-  
+
+img{
+  min-width: 400px;
 }
 h1{
     font-size: 30px;
