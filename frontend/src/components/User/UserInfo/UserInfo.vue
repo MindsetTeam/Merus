@@ -76,6 +76,7 @@ button {
   margin-left: auto;
   margin-right: auto;
   height: 58px;
+  height: 58px;
   margin-top: 20px;
 }
 .below-profile-container {
