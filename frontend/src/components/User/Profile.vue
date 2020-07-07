@@ -1,7 +1,11 @@
 <template>
+<div class="biggest-container">
+    <div :style="backgroundImg">
+    </div>
   <div class="container">
-    <UserInfo v-bind:userInfo="user"></UserInfo>
+    <UserInfo class="UserInfo" v-bind:userInfo="user"></UserInfo>
     <div></div>
+  </div>
   </div>
 </template>
 
@@ -14,7 +18,9 @@ export default {
   },
   data() {
     return {
-      user: null
+      user: {
+        coverBackground:"https://picsum.photos/640/480"
+      }
     };
   },
   methods: {
@@ -26,6 +32,19 @@ export default {
       this.user = user.data.data[0];
     }
   },
+  computed:{
+    backgroundImg(){
+      return `background-color: #efeff0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 250px;
+    position: relative;
+    background-image: url(${this.user.coverBackground});
+}
+`
+    }
+  },
   created() {
     this.getUserInfo();
   }
@@ -33,8 +52,17 @@ export default {
 </script>
 
 <style scoped>
+.biggest-container{
+  position: relative;
+}
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+.UserInfo{
+
+  position: absolute;
+  top: 70%;
+  left: 10%;
 }
 </style>

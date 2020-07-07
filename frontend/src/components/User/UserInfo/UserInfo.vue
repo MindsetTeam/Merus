@@ -1,13 +1,13 @@
 <template>
-<div>
+<div class="biggest-container">
   <div class="upper-container-profile">
     <div>
       <img :src="userInfo.imageUrl" alt />
      <router-link class="router-link" :to="{name:'main'}">
          {{userInfo.username}}</router-link>
-      <p>{{userInfo.description}}</p>
-      <p>{{userInfo.averageRate}}</p>
-      <p>{{userInfo.reviewCount}}</p>
+      <p v-for="(skill,i) in userInfo.skill" :key="i">{{skill.toUpperCase()}}</p>
+      <p>Avg: {{userInfo.averageRate}}</p>
+      <p>Count: {{userInfo.reviewCount}}</p>
       <button>Request To Perform (${{userInfo.price}})</button>
     </div>
     <div class="below-profile">
@@ -28,7 +28,8 @@
     </div>
   </div>
   <div class="lower-container-profile">
-
+    <h1>Description</h1>
+    <h4>{{userInfo.description}}</h4>
   </div>
   </div>
 </template>
@@ -40,6 +41,20 @@ export default {
 </script>
 
 <style scoped>
+.biggest-container{
+  background: white;
+}
+h1{
+  font-size: 22px;
+  font-weight: 700;
+}
+.lower-container-profile{
+  margin-top: 30px;
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.404);
+  display: flex;
+  flex-direction: column;
+}
 .upper-container-profile {
   padding: 30px;
   border: 1px solid rgba(0, 0, 0, 0.404);
@@ -79,7 +94,13 @@ button {
   height: 58px;
   margin-top: 20px;
 }
+.below-profile{
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.404);
+}
 .below-profile-container {
+  
   display: flex;
   justify-content: space-between;
 }
