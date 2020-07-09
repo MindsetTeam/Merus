@@ -21,6 +21,7 @@
       <div class="below-profile-container">
         <div>
           <i class="fas fa-user"></i>
+          <i class="fas fa-user"></i>
           <span>Since</span>
         </div>
         <div><p>{{userInfo.createdAt}}</p></div>
